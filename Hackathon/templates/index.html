@@ -15,7 +15,6 @@
             justify-content: center;
             align-items: center;
         }
-
         .container {
             background: white;
             padding: 40px 30px;
@@ -24,13 +23,11 @@
             max-width: 500px;
             width: 100%;
         }
-
         h1 {
             text-align: center;
             margin-bottom: 20px;
             color: #333;
         }
-
         label {
             font-weight: bold;
             display: block;
@@ -38,9 +35,7 @@
             margin-top: 15px;
             color: #555;
         }
-
-        input[type="text"], 
-        input[type="number"] {
+        input[type="text"], input[type="number"], select {
             width: 100%;
             padding: 10px;
             border: 1px solid #ddd;
@@ -49,7 +44,6 @@
             font-size: 16px;
             box-sizing: border-box;
         }
-
         input[type="submit"] {
             margin-top: 25px;
             width: 100%;
@@ -62,24 +56,33 @@
             cursor: pointer;
             transition: background 0.3s;
         }
-
         input[type="submit"]:hover {
             background: #45a049;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>Heart Disease Prediction</h1>
         <form action="/predict" method="POST">
+
             <label for="age">Age:</label>
             <input type="number" id="age" name="age" required>
 
-            <label for="sex">Sex (Male/Female):</label>
-            <input type="text" id="sex" name="sex" required>
+            <label for="sex">Sex:</label>
+            <select id="sex" name="sex" required>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+            </select>
 
             <label for="cp">Chest Pain Type:</label>
-            <input type="text" id="cp" name="cp" required>
+            <select id="cp" name="cp" required>
+                <option value="Typical Angina">Typical Angina</option>
+                <option value="Atypical Angina">Atypical Angina</option>
+                <option value="Non-Anginal Pain">Non-Anginal Pain</option>
+                <option value="Asymptomatic">Asymptomatic</option>
+            </select>
 
             <label for="trestbps">Resting Blood Pressure (mm Hg):</label>
             <input type="number" id="trestbps" name="trestbps" required>
@@ -91,21 +94,33 @@
             <input type="number" id="fbs" name="fbs" required>
 
             <label for="restecg">Resting ECG:</label>
-            <input type="text" id="restecg" name="restecg" required>
+            <select id="restecg" name="restecg" required>
+                <option value="Normal">Normal</option>
+                <option value="ST-T abnormality">ST-T abnormality</option>
+                <option value="Left ventricular hypertrophy">Left ventricular hypertrophy</option>
+            </select>
 
             <label for="thalach">Maximum Heart Rate Achieved:</label>
             <input type="number" id="thalach" name="thalach" required>
 
-            <label for="exang">Exercise Induced Angina (Yes/No):</label>
-            <input type="text" id="exang" name="exang" required>
+            <label for="exang">Exercise Induced Angina:</label>
+            <select id="exang" name="exang" required>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+            </select>
 
             <label for="oldpeak">ST Depression Induced by Exercise:</label>
-            <input type="number" id="oldpeak" name="oldpeak" required>
+            <input type="number" id="oldpeak" name="oldpeak" step="0.1" required>
 
-            <label for="slope">Slope of the Peak Exercise ST Segment:</label>
-            <input type="text" id="slope" name="slope" required>
+            <label for="slope">Slope of Peak Exercise ST Segment:</label>
+            <select id="slope" name="slope" required>
+                <option value="Upsloping">Upsloping</option>
+                <option value="Flat">Flat</option>
+                <option value="Downsloping">Downsloping</option>
+            </select>
 
             <input type="submit" value="Predict">
+
         </form>
     </div>
 </body>

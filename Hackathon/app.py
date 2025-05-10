@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request
 import joblib
 import numpy as np
 
@@ -17,8 +17,8 @@ def home():
 # Route to handle prediction
 @app.route('/predict', methods=['POST'])
 def predict():
-    if request.method == 'POST':
-        # Get form data
+    # Get form data and ensure proper data types
+    try:
         age = int(request.form['age'])
         sex = request.form['sex']
         cp = request.form['cp']
@@ -41,16 +41,16 @@ def predict():
         # Create input sample for prediction
         sample = [
             age,
-            sex_map.get(sex, 0),
-            cp_map.get(cp, 0),
+            sex_map.get(sex, 0),  # Default to 0 if not found
+            cp_map.get(cp, 0),    # Default to 0 if not found
             trestbps,
             chol,
             fbs,
-            restecg_map.get(restecg, 1),
+            restecg_map.get(restecg, 1),  # Default to 1 if not found
             thalach,
-            exang_map.get(exang, 0),
+            exang_map.get(exang, 0),  # Default to 0 if not found
             oldpeak,
-            slope_map.get(slope, 1)
+            slope_map.get(slope, 1)  # Default to 1 if not found
         ]
 
         # Scaling input features
@@ -79,8 +79,9 @@ def predict():
         else:
             result["suggestion"] = "Maintain a healthy lifestyle with regular checkups to stay safe."
 
-
         return render_template('result.html', result=result)
+    except Exception as e:
+        return f"Error: {e}"
 
 if __name__ == '__main__':
     app.run(debug=True)
