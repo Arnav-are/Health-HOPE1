@@ -15,7 +15,7 @@ def home():
     return render_template('index.html')
 
 # Route to handle prediction
-@app.route('/predict', methods=['POST'])
+@app.route('/predict', methods=['GET', 'POST'])
 def predict():
     if request.method == 'POST':
         # Get form data
